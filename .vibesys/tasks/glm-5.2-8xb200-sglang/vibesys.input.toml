@@ -1,0 +1,24 @@
+version = 1
+
+[agent]
+domain = "llm-serving"
+
+[accuracy]
+command = [
+  "uv", "run", "--no-project",
+  "--with-requirements", ".vibesys/tasks/glm-5.2-8xb200-sglang/requirements.txt",
+  "python", ".vibesys/tasks/glm-5.2-8xb200-sglang/accuracy_checker/checker.py",
+]
+timeout_seconds = 600
+
+[benchmark]
+command = [
+  "uv", "run", "--no-project",
+  "--with-requirements", ".vibesys/tasks/glm-5.2-8xb200-sglang/requirements.txt",
+  "python", ".vibesys/tasks/glm-5.2-8xb200-sglang/benchmark/benchmark.py",
+]
+timeout_seconds = 1800
+
+[benchmark.result]
+json_argument = "--output-json"
+metric = "aggregate_throughput"
